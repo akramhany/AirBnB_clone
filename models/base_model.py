@@ -14,14 +14,22 @@ class BaseModel:
     for all the classes.
     """
 
-    def __init__(self):
+    def __init__(self, *args, **kwargs):
         """
         initialize all the attributes of the class.
         """
 
-        self.id = str(uuid.uuid4())
-        self.created_at = datetime.now()
-        self.updated_at = datetime.now()
+        d_format = "%Y-%m-%dT%H:%M:%S.%f"
+        if not args and kwargs:
+            for key, val in kwargs.items():
+                if key == "created_at" or key == "updated_at":
+                    setattr(self, key, datetime.strptime(val, d_format))
+                elif key != "__class__":
+                    setattr(self, key, val)
+        else:
+            self.id = str(uuid.uuid4())
+            self.created_at = datetime.now()
+            self.updated_at = datetime.now()
 
     def __str__(self):
         """
@@ -49,6 +57,6 @@ class BaseModel:
             inst_dict[key] = self.__dict__[key]
         inst_dict["__class__"] = "BaseModel"
         d_format = "%Y-%m-%dT%H:%M:%S.%f"
-        inst_dict["created_at"] = inst_dict["created_at"].strftime("d_format")
-        inst_dict["updated_at"] = inst_dict["updated_at"].strftime("d_format")
+        inst_dict["created_at"] = inst_dict["created_at"].strftime(d_format)
+        inst_dict["updated_at"] = inst_dict["updated_at"].strftime(d_format)
         return inst_dict
