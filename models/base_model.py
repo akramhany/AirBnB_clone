@@ -44,7 +44,9 @@ class BaseModel:
         of __dict__ of the instance.
         """
 
-        inst_dict = self.__dict__
+        inst_dict = {}
+        for key in self.__dict__:
+            inst_dict[key] = self.__dict__[key]
         inst_dict["__class__"] = "BaseModel"
         d_format = "%Y-%m-%dT%H:%M:%S.%f"
         inst_dict["created_at"] = inst_dict["created_at"].strftime("d_format")
