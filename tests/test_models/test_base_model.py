@@ -9,8 +9,13 @@ from models.base_model import BaseModel
 
 
 class TestBaseModel(unittest.TestCase):
+    """
+    Test class to test different things in the BaseModel class.
+    """
 
     def test_id(self):
+        """ Tests related to id """
+
         b1 = BaseModel()
         b2 = BaseModel()
 
@@ -18,6 +23,8 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(isinstance(b1.id, str))
 
     def test_general(self):
+        """ Test general things """
+
         b1 = BaseModel()
 
         b1_dict = b1.to_dict()
