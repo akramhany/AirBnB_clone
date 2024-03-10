@@ -20,6 +20,9 @@ class TestBaseModel(unittest.TestCase):
     def test_general(self):
         b1 = BaseModel()
 
-        self.assertTrue(isinstance(b1.to_dict(), dict))
+        b1_dict = b1.to_dict()
+        self.assertTrue(isinstance(b1_dict, dict))
         self.assertTrue(isinstance(b1.created_at, datetime.datetime))
         self.assertTrue(isinstance(b1.updated_at, datetime.datetime))
+        self.assertEqual(b1_dict["__class__"], "BaseModel")
+        self.assertTrue(isinstance(b1_dict["created_at"], str))
