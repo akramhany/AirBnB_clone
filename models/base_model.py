@@ -19,6 +19,8 @@ class BaseModel:
         initialize all the attributes of the class.
         """
 
+        from models.__init__ import storage
+
         d_format = "%Y-%m-%dT%H:%M:%S.%f"
         if not args and kwargs:
             for key, val in kwargs.items():
@@ -30,6 +32,7 @@ class BaseModel:
             self.id = str(uuid.uuid4())
             self.created_at = datetime.now()
             self.updated_at = datetime.now()
+            storage.new(self)
 
     def __str__(self):
         """
@@ -44,7 +47,15 @@ class BaseModel:
         with the current datetime.
         """
 
+        from models.__init__ import storage
+
+        storage.save()
         self.updated_at = datetime.now()
+
+    def get_name(self):
+        """ Returns the class name """
+
+        return "BaseModel"
 
     def to_dict(self):
         """
