@@ -27,10 +27,10 @@ class FileStorage:
 
         try:
             with open(FileStorage.__file_path, 'w', encoding="utf-8") as f:
-                objects_list = []
-                for obj in FileStorage.__objects.values():
-                    objects_list.append(obj.to_dict())
-                json_rep = json.dumps(objects_list)
+                objects_dict = {}
+                for key, val in FileStorage.__objects.items():
+                    objects_dict[key] = val.to_dict()
+                json_rep = json.dumps(objects_dict)
                 f.write(json_rep)
 
         except FileNotFoundError:
@@ -46,8 +46,8 @@ class FileStorage:
 
         with open(FileStorage.__file_path, 'r', encoding="utf-8") as f:
             json_data = f.read()
-            objects_data = json.loads(json_data)
+            objects_dict = json.loads(json_data)
 
-        for obj_dict in objects_data:
+        for obj_dict in objects_dict.values():
             obj = BaseModel(**obj_dict)
             self.new(obj)
