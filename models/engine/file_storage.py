@@ -44,9 +44,12 @@ class FileStorage:
         if not os.path.exists(FileStorage.__file_path):
             return
 
-        with open(FileStorage.__file_path, 'r', encoding="utf-8") as f:
-            json_data = f.read()
-            objects_dict = json.loads(json_data)
+        try:
+            with open(FileStorage.__file_path, 'r', encoding="utf-8") as f:
+                json_data = f.read()
+                objects_dict = json.loads(json_data)
+        except Exception:
+            return
 
         for obj_dict in objects_dict.values():
             obj = BaseModel(**obj_dict)
