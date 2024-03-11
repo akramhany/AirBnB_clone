@@ -32,7 +32,6 @@ class FileStorage:
                     objects_dict[key] = val.to_dict()
                 json_rep = json.dumps(objects_dict)
                 f.write(json_rep)
-
         except FileNotFoundError:
             print("File not found")
 
@@ -51,6 +50,9 @@ class FileStorage:
         except Exception:
             return
 
-        for obj_dict in objects_dict.values():
-            obj = BaseModel(**obj_dict)
-            self.new(obj)
+        try:
+            for obj_dict in objects_dict.values():
+                obj = BaseModel(**obj_dict)
+                self.new(obj)
+        except Exception:
+            return
