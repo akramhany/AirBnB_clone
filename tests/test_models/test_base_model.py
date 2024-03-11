@@ -21,6 +21,7 @@ class TestBaseModel(unittest.TestCase):
 
         self.assertNotEqual(b1.id, b2.id)
         self.assertTrue(isinstance(b1.id, str))
+        self.assertEqual(len(b1.id), 36)
 
     def test_general(self):
         """ Test general things """
@@ -33,3 +34,4 @@ class TestBaseModel(unittest.TestCase):
         self.assertTrue(isinstance(b1.updated_at, datetime.datetime))
         self.assertEqual(b1_dict["__class__"], "BaseModel")
         self.assertTrue(isinstance(b1_dict["created_at"], str))
+        self.assertTrue(isinstance(b1_dict["updated_at"], str))
