@@ -27,6 +27,7 @@ class TestFileStorage(unittest.TestCase):
         """ General Tests """
 
         storage = FileStorage()
+
         b1 = BaseModel()
 
         self.assertTrue(isinstance(storage.all(), dict))
