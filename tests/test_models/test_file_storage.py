@@ -14,6 +14,15 @@ class TestFileStorage(unittest.TestCase):
     Test class to test different things in the BaseModel class.
     """
 
+    def test_class_attributes(self):
+        """ Test the class attributes of the FileStorage class """
+
+        with self.assertRaises(AttributeError):
+            FileStorage.__file_path
+
+        with self.assertRaises(AttributeError):
+            FileStorage.__objects
+
     def test_general(self):
         """ General Tests """
 
