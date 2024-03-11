@@ -49,8 +49,8 @@ class BaseModel:
 
         from models.__init__ import storage
 
-        storage.save()
         self.updated_at = datetime.now()
+        storage.save()
 
     def get_name(self):
         """ Returns the class name """

@@ -47,8 +47,8 @@ class FileStorage:
             with open(FileStorage.__file_path, 'r', encoding="utf-8") as f:
                 json_data = f.read()
                 objects_dict = json.loads(json_data)
-        except Exception:
-            return
+        except ValueError as e:
+            print("Error:", e)
 
         try:
             for obj_dict in objects_dict.values():
