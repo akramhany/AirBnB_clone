@@ -35,3 +35,13 @@ class TestBaseModel(unittest.TestCase):
         self.assertEqual(b1_dict["__class__"], "BaseModel")
         self.assertTrue(isinstance(b1_dict["created_at"], str))
         self.assertTrue(isinstance(b1_dict["updated_at"], str))
+        
+        prev_val = b1.updated_at
+        b1.save()
+        self.assertNotEqual(prev_val, b1.updated_at)
+
+    def test_str(self):
+        """ Test the str attribute """
+
+        b1 = BaseModel()
+        self.assertEqual(b1.__str__(), "[BaseModel] ({}) {}".format(b1.id, b1.__dict__))
