@@ -32,8 +32,8 @@ class FileStorage:
                     objects_dict[key] = val.to_dict()
                 json_rep = json.dumps(objects_dict)
                 f.write(json_rep)
-        except FileNotFoundError:
-            print("File not found")
+        except Exception:
+            return
 
     def reload(self):
         """ Deserializes the JSON file to __objects """
