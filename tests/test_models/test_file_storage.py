@@ -18,10 +18,15 @@ class TestFileStorage(unittest.TestCase):
         """ Test the class attributes of the FileStorage class """
 
         with self.assertRaises(AttributeError):
-            FileStorage.__file_path
+            print(FileStorage.__file_path)
 
         with self.assertRaises(AttributeError):
-            FileStorage.__objects
+            print(FileStorage.__objects)
+
+        b1 = BaseModel()
+        updated_at = b1.updated_at
+        b1.save()
+        self.assertNotEqual(b1.updated_at, updated_at)
 
     def test_general(self):
         """ General Tests """
