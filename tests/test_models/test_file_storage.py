@@ -27,6 +27,11 @@ class TestFileStorage(unittest.TestCase):
         updated_at = b1.updated_at
         b1.save()
         self.assertNotEqual(b1.updated_at, updated_at)
+        
+        self.assertTrue(hasattr(FileStorage, "save"))
+        self.assertTrue(hasattr(FileStorage, "all"))
+        self.assertTrue(hasattr(FileStorage, "new"))
+        self.assertTrue(hasattr(FileStorage, "reload"))
 
     def test_general(self):
         """ General Tests """
