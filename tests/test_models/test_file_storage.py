@@ -14,6 +14,11 @@ class TestFileStorage(unittest.TestCase):
     Test class to test different things in the BaseModel class.
     """
 
+    def setUp(self):
+        """ Reset class attributes """
+
+        FileStorage._FileStorage__objects = {}
+
     def test_class_attributes(self):
         """ Test the class attributes of the FileStorage class """
 
@@ -32,6 +37,12 @@ class TestFileStorage(unittest.TestCase):
         self.assertTrue(hasattr(FileStorage, "all"))
         self.assertTrue(hasattr(FileStorage, "new"))
         self.assertTrue(hasattr(FileStorage, "reload"))
+
+    def test_general(self):
+        """ General Tests """
+
+        self.assertEqual(FileStorage._FileStorage__file_path, "file.json")
+        self.assertEqual(FileStorage._FileStorage__objects, {})
 
     def test_general(self):
         """ General Tests """
