@@ -74,6 +74,47 @@ class HBNBCommand(cmd.Cmd):
         else:
             print(str_list)
 
+    def do_update(self, line):
+        """ 
+        Takes an argument name and a value, and set it for a certain obj id
+        and a certain class name.
+        """
+
+        argv = line.split(" ")
+        if len(argv) == 0:
+            print("** class name missing **")
+            return
+        # hard coded check over class name, TODO: fix it.
+        elif argv[0] != "BaseModel":
+            print("** class doesn't exist **")
+            return
+        elif len(argv) == 1:
+            print("** instance id missing **")
+            return
+        
+        target = None
+        for obj in storage.all().values():
+            if obj.id == argv[1]:
+                target = obj
+                break
+        
+        if target is None:
+            print("** no instance found **")
+            return
+
+        if len(argv) == 2:
+            print("** attribute name missing **")
+            return
+        elif len(argv) == 3:
+            print("** value missing **")
+            return
+
+        attr_name, attr_value = argv[2], argv[3]
+        attr_value = attr_value.strip('"\'')
+        target.update(attr_name, attr_value)
+        target.save()
+
+
     def do_destroy(self, line):
         """ Takes the class name and id of an object and deletes it """
 
