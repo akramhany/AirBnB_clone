@@ -18,6 +18,7 @@ class TestFileStorage(unittest.TestCase):
         """ Reset class attributes """
 
         FileStorage._FileStorage__objects = {}
+        FileStorage._FileStorage__file_path = "file.json"
 
     def test_class_attributes(self):
         """ Test the class attributes of the FileStorage class """
@@ -43,6 +44,8 @@ class TestFileStorage(unittest.TestCase):
 
         self.assertEqual(FileStorage._FileStorage__file_path, "file.json")
         self.assertEqual(FileStorage._FileStorage__objects, {})
+        FileStorage._FileStorage__file_path = "test.json"
+        self.assertEqual(FileStorage._FileStorage__file_path, "test.json")
 
     def test_general(self):
         """ General Tests """
