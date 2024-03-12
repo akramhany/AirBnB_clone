@@ -39,7 +39,7 @@ class BaseModel:
         prints info about the class.
         """
 
-        return "[BaseModel] ({}) {}".format(self.id, self.__dict__)
+        return "[{}] ({}) {}".format(self.get_name(), self.id, self.__dict__)
 
     def save(self):
         """
@@ -65,7 +65,6 @@ class BaseModel:
         else:
             self.__dict__[attr_name] = str(attr_value)
 
-
     def get_name(self):
         """ Returns the class name """
 
@@ -80,7 +79,7 @@ class BaseModel:
         inst_dict = {}
         for key in self.__dict__:
             inst_dict[key] = self.__dict__[key]
-        inst_dict["__class__"] = "BaseModel"
+        inst_dict["__class__"] = self.get_name()
         d_format = "%Y-%m-%dT%H:%M:%S.%f"
         inst_dict["created_at"] = inst_dict["created_at"].strftime(d_format)
         inst_dict["updated_at"] = inst_dict["updated_at"].strftime(d_format)

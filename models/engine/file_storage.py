@@ -39,6 +39,7 @@ class FileStorage:
         """ Deserializes the JSON file to __objects """
 
         from ..base_model import BaseModel
+        from ..user import User
 
         if not os.path.exists(FileStorage.__file_path):
             return
@@ -52,7 +53,10 @@ class FileStorage:
 
         try:
             for obj_dict in objects_dict.values():
-                obj = BaseModel(**obj_dict)
+                if obj_dict["__class__"] == "BaseModel":
+                    obj = BaseModel(**obj_dict)
+                elif obj_dict["__class__"] == "User":
+                    obj = User(**obj_dict)
                 self.new(obj)
         except Exception:
             return

@@ -3,7 +3,9 @@
 
 import cmd
 from models.base_model import BaseModel
+from models.user import User
 from models.__init__ import storage
+from models.__init__ import classes_list
 
 
 class HBNBCommand(cmd.Cmd):
@@ -23,18 +25,28 @@ class HBNBCommand(cmd.Cmd):
 
     def do_create(self, class_name):
         """
-        Creates a new instance of class BaseModel, saves it and prints its id.
+        Creates a new instance of class name, saves it and prints its id.
         """
 
         if not class_name:
             print("** class name missing **")
             return
 
-        if class_name != "BaseModel":
+        name_exists = False
+        for name in classes_list:
+            if name == class_name:
+                name_exists = True
+                break
+
+        if not name_exists:
             print("** class doesn't exist **")
             return
 
-        obj = BaseModel()
+        if class_name == "BaseModel":
+            obj = BaseModel()
+        elif class_name == "User":
+            obj = User()
+
         obj.save()
         print(obj.id)
 
@@ -85,7 +97,14 @@ class HBNBCommand(cmd.Cmd):
             return
         argv = line.split(" ")
         # hard coded check over class name, TODO: fix it.
-        if argv[0] != "BaseModel":
+
+        name_exists = False
+        for name in classes_list:
+            if name == argv[0]:
+                name_exists = True
+                break
+
+        if not name_exists:
             print("** class doesn't exist **")
             return
         elif len(argv) == 1:
@@ -147,9 +166,16 @@ class HBNBCommand(cmd.Cmd):
             return False
 
         argv = line.split(" ")
-        if argv[0] != "BaseModel":
+
+        name_exists = False
+        for name in classes_list:
+            if name == argv[0]:
+                name_exists = True
+                break
+
+        if not name_exists:
             print("** class doesn't exist **")
-            return False
+            return
         elif len(argv) == 1:
             print("** instance id missing **")
             return False
