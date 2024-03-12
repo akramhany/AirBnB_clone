@@ -42,6 +42,7 @@ class HBNBCommand(cmd.Cmd):
             print("** class doesn't exist **")
             return
 
+        # UPDATE when adding a new class.
         if class_name == "BaseModel":
             obj = BaseModel()
         elif class_name == "User":

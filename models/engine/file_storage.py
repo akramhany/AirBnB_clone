@@ -51,6 +51,7 @@ class FileStorage:
         except ValueError as e:
             print("Error:", e)
 
+        # UPDATE when adding a new class.
         try:
             for obj_dict in objects_dict.values():
                 if obj_dict["__class__"] == "BaseModel":
