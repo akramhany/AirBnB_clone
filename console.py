@@ -77,7 +77,7 @@ class HBNBCommand(cmd.Cmd):
 
         # loop over all of the stored objects, get the required obj with id.
         for obj in storage.all().values():
-            if id == obj.id:
+            if id == obj.id and argv[0] == obj.get_name():
                 print(obj)
                 return
 
@@ -129,7 +129,7 @@ class HBNBCommand(cmd.Cmd):
 
         target = None
         for obj in storage.all().values():
-            if obj.id == argv[1]:
+            if obj.id == argv[1] and argv[0] == obj.get_name():
                 target = obj
                 break
 
@@ -162,7 +162,7 @@ class HBNBCommand(cmd.Cmd):
 
         # loop over all of the stored objects, get the required obj with id.
         for key, obj in objects_list.items():
-            if id == obj.id:
+            if id == obj.id and argv[0] == obj.get_name():
                 del objects_list[key]
                 storage.save()
                 return
