@@ -49,30 +49,30 @@ class FileStorage:
         if not os.path.exists(FileStorage.__file_path):
             return
 
-        try:
-            with open(FileStorage.__file_path, 'r', encoding="utf-8") as f:
-                json_data = f.read()
-                objects_dict = json.loads(json_data)
-        except ValueError as e:
-            print("Error:", e)
+        # try:
+        with open(FileStorage.__file_path, 'r', encoding="utf-8") as f:
+            json_data = f.read()
+            objects_dict = json.loads(json_data)
+        # except ValueError as e:
+            # print("Error:", e)
 
         # UPDATE when adding a new class.
-        try:
-            for obj_dict in objects_dict.values():
-                if obj_dict["__class__"] == "BaseModel":
-                    obj = BaseModel(**obj_dict)
-                elif obj_dict["__class__"] == "User":
-                    obj = User(**obj_dict)
-                elif obj_dict["__class__"] == "State":
-                    obj = State(**obj_dict)
-                elif obj_dict["__class__"] == "City":
-                    obj = City(**obj_dict)
-                elif obj_dict["__class__"] == "Amenity":
-                    obj = Amenity(**obj_dict)
-                elif obj_dict["__class__"] == "Place":
-                    obj = Place(**obj_dict)
-                elif obj_dict["__class__"] == "Review":
-                    obj = Review(**obj_dict)
-                self.new(obj)
-        except Exception:
-            return
+        # try:
+        for obj_dict in objects_dict.values():
+            if obj_dict["__class__"] == "BaseModel":
+                obj = BaseModel(**obj_dict)
+            elif obj_dict["__class__"] == "User":
+                obj = User(**obj_dict)
+            elif obj_dict["__class__"] == "State":
+                obj = State(**obj_dict)
+            elif obj_dict["__class__"] == "City":
+                obj = City(**obj_dict)
+            elif obj_dict["__class__"] == "Amenity":
+                obj = Amenity(**obj_dict)
+            elif obj_dict["__class__"] == "Place":
+                obj = Place(**obj_dict)
+            elif obj_dict["__class__"] == "Review":
+                obj = Review(**obj_dict)
+            self.new(obj)
+        # except Exception:
+            # return
