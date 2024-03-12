@@ -55,14 +55,14 @@ class BaseModel:
     def update(self, attr_name, attr_value):
         """ Takes an attribute name and a value and updates it """
 
-        if hasattr(self, attr_name):
+        try:
             if isinstance(self.__dict__[attr_name], int):
                 self.__dict__[attr_name] = int(attr_value)
             elif isinstance(self.__dict__[attr_name], float):
                 self.__dict__[attr_name] = float(attr_value)
             else:
                 self.__dict__[attr_name] = str(attr_value)
-        else:
+        except KeyError:
             self.__dict__[attr_name] = str(attr_value)
 
     def get_name(self):

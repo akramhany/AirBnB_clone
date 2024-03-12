@@ -39,6 +39,11 @@ class FileStorage:
         """ Deserializes the JSON file to __objects """
 
         from ..base_model import BaseModel
+        from ..state import State
+        from ..city import City
+        from ..amenity import Amenity
+        from ..place import Place
+        from ..review import Review
         from ..user import User
 
         if not os.path.exists(FileStorage.__file_path):
@@ -58,6 +63,16 @@ class FileStorage:
                     obj = BaseModel(**obj_dict)
                 elif obj_dict["__class__"] == "User":
                     obj = User(**obj_dict)
+                elif obj_dict["__class__"] == "State":
+                    obj = State(**obj_dict)
+                elif obj_dict["__class__"] == "City":
+                    obj = City(**obj_dict)
+                elif obj_dict["__class__"] == "Amenity":
+                    obj = Amenity(**obj_dict)
+                elif obj_dict["__class__"] == "Place":
+                    obj = Place(**obj_dict)
+                elif obj_dict["__class__"] == "Review":
+                    obj = Review(**obj_dict)
                 self.new(obj)
         except Exception:
             return
