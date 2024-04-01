@@ -1,0 +1,30 @@
+.places {
+  margin-top: 20px;
+  position: relative;
+  padding: 0px 12px;
+}
+
+.places .title {
+  font-size: 30px;
+}
+
+.cards {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+}
+
+.cards article {
+  width: 390px;
+  padding: 20px;
+  margin: 20px;
+  border: 1px solid #ff5a5f;
+  border-radius: 4px;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+}
+
+.cards h2 {
+  font-size: 30px;
+}
